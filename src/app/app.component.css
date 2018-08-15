@@ -1,0 +1,11 @@
+.my-grid{
+  display: grid;
+  grid-template-columns: 0.6fr 3fr;
+  grid-template-rows: 100%;
+}
+
+
+
+
+
+

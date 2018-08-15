@@ -1,0 +1,36 @@
+<hr>
+<p>Добавить Маркер</p>
+<form (ngSubmit) = "onAddMarker()" #form="ngForm">
+  <div>
+    <label>Введите имя маркера</label>
+    <input type="text"
+           ngModel
+           name="name"
+           required
+    >
+  </div>
+  <hr>
+  <div>
+    <label>Введите координаты</label>
+    <hr>
+    <input type="number"
+           ngModel
+           name="x"
+           required
+    >
+
+    <input type="number"
+           ngModel
+           name="y"
+           required
+    >
+  </div>
+  <hr>
+  <button class="button btcolor" type = "submit"
+          [disabled]="!form.valid"
+  >
+    Добавить маркер
+  </button>
+</form>
+
+

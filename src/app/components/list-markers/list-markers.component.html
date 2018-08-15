@@ -1,0 +1,9 @@
+<label>Фильтр по имени</label>
+<input [(ngModel)] ="searchStr">
+<hr>
+<ul class="zebra">
+  <li *ngFor="let marker of list | search:searchStr ; let indx = index " (click)="selectMarker(marker)" [style.background-color]="selectedMarker === marker ? 'grey' : ''" >
+    {{marker.name}}
+    <button class="button btcolor" (click)="onDeleteMarker(indx)"> Удалить </button>
+  </li>
+</ul>

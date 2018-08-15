@@ -1,0 +1,10 @@
+<div class = "my-grid">
+  <div>
+   <app-list-markers (onMarker)="onMarker($event)" [(selectedMarker)]="selectedMarker"></app-list-markers>
+    <app-add-marker (onMarker)="onMarker($event)"></app-add-marker>
+  </div>
+<div style="height: 1000px" id="map"></div>
+
+</div>
+
+
