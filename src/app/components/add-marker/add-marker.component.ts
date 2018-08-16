@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 import {MapService} from '../../services/map.service';
 import {NgForm} from '@angular/forms';
+import {MapObject} from '../../services/mapobject.module';
 
 @Component({
   selector: 'app-add-marker',
@@ -15,8 +16,8 @@ export class AddMarkerComponent {
 
 
   onAddMarker(){
-    const marker = this.mapService.addMarker(this.form.value.name, this.form.value.x, this.form.value.y);
-    marker.marker.on('click', ()=> this.onMarker.emit(marker));
+    const mapObject: MapObject = this.mapService.addMarker(this.form.value.name, this.form.value.x, this.form.value.y);
+    mapObject.marker.on('click', ()=> this.onMarker.emit(mapObject));
   }
 
 }

@@ -13,11 +13,12 @@ import {
 } from 'leaflet';
 
 import * as data from './markers.json';
+import {MapObject} from './mapobject.module';
 
 @Injectable()
 export class MapService {
   private mapElement: Map;
-  public markers: {name: string, marker: Marker}[] = [];
+  public mapObjects: MapObject[] = [];
 
   public registerMap(mapId: string, tilesURL: string = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png') {
     this.createMapElement(mapId, tilesURL);
@@ -63,38 +64,40 @@ export class MapService {
 
   public loadJSONdata() {
     const markFromData = (<any>data).item;
-    let marker: {marker: Marker, name: string};
+    let marker: MapObject;
     for (const markerData of  markFromData) {
       marker = {
         marker: this.addPoint(markerData.coordinates),
         name: markerData.desc
       };
-      this.markers.push(marker);
+      this.mapObjects.push(marker);
     }
   }
   public setColor(color: string){
-    const icon = divIcon({
-      className: "my-custom-pin",
-      iconAnchor: [0, 25],
-      labelAnchor: [-6, 0],
-      popupAnchor: [0, -36],
-      html: `<span style="background-color: ${color}; width: 1.3rem; height: 1.3rem; display: block; left: -1.5rem; top: -1.5rem; position: relative; border-radius: 3rem 3rem 0; transform: rotate(45deg); border: 1px solid #FFFFFF" />`
-    })
+    const icon = new Icon({
+        iconUrl: `assets/marker-${color}.png`,
+        shadowUrl: 'assets/marker-shadow.png',
+        iconSize: [25, 41],
+        iconAnchor: [12, 41],
+        popupAnchor: [1, -34],
+        shadowSize: [41, 41]
+      });
+
     return icon
   }
 
   public deleteMarker(index: any){
-    this.mapElement.removeLayer(this.markers[index].marker);
-    this.markers.splice(index, 1);
+    this.mapElement.removeLayer(this.mapObjects[index].marker);
+    this.mapObjects.splice(index, 1);
   }
 
   public addMarker(name: string, x: number, y: number) {
-    let marker: {marker: Marker, name: string};
+    let marker: MapObject;
     marker = {
         name: name,
         marker: this.addPoint([x, y]),
     }
-      this.markers.push(marker)
+      this.mapObjects.push(marker)
     return marker;
   }
 

@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {MapService} from '../../services/map.service';
+import {MapObject} from '../../services/mapobject.module';
 
 @Component({
   selector: 'app-list-markers',
@@ -8,21 +9,21 @@ import {MapService} from '../../services/map.service';
 })
 export class ListMarkersComponent implements OnInit {
   searchStr: string = '';
-  list: any = [];
+  list: MapObject[] = [];
   @Input() selectedMarker: any = null;
   @Output() onMarker = new EventEmitter<any>();
 
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
-    this.list = this.mapService.markers;
+    this.list = this.mapService.mapObjects;
   }
 
-  onDeleteMarker(index:any){
+  onDeleteMarker(index:number){
     this.mapService.deleteMarker(index);
   }
 
-  selectMarker(marker:any){
+  selectMarker(marker: MapObject){
     this.onMarker.emit(marker);
   }
 }

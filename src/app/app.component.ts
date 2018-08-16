@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MapService} from './services/map.service';
+import {MapObject} from './services/mapobject.module';
 
 
 @Component({
@@ -8,7 +9,7 @@ import {MapService} from './services/map.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  public selectedMarker: any = null;
+  selectedMarker: MapObject = null;
   constructor(private mapService: MapService) { }
 
   ngOnInit() {
@@ -18,20 +19,20 @@ export class AppComponent implements OnInit {
         <h3>Leaflet PopUp</h1>
         <p>Some text</p>
     `);*/
-    for(let marker of this.mapService.markers) {
-      marker.marker.on('click', () => {
-        this.onMarker(marker);
+    for(let mapObject of this.mapService.mapObjects) {
+      mapObject.marker.on('click', () => {
+        this.onMarker(mapObject);
       });
     }
   }
 
-  onMarker(marker: any) {
+  onMarker(mapObject: MapObject) {
     if (this.selectedMarker !== null) {
       this.selectedMarker.marker.setIcon(this.mapService.setColor('green'));
     }
-    this.selectedMarker = marker;
+    this.selectedMarker = mapObject;
     this.selectedMarker.marker.setIcon(this.mapService.setColor('red'));
-    this.mapService.setCenter(marker.marker);
+    this.mapService.setCenter(mapObject.marker);
   }
 
 

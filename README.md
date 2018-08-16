@@ -1,5 +1,5 @@
 # Proteytest
-В данном проекте было выполнено -> [тестовое задание от НТЦ Протей](https://github.com/bodryi/frontend-test`)
+В данном проекте было выполнено -> [тестовое задание от НТЦ Протей](https://github.com/bodryi/frontend-test)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.2.
 
